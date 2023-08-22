@@ -4,7 +4,6 @@
 # The Nexus Battles II: Servicio API REST para gestión de cartas
 
 The Nexus Battles II API es un componente fundamental diseñado para potenciar la experiencia de juego en The Nexus Battles II, un juego de cartas coleccionables en línea. El API proporciona una interfaz fácil de usar que permite a los jugadores, desarrolladores y administradores interactuar con el sistema de cartas de una manera eficiente y efectiva.
-## Licencias
 
 [![MIT](https://img.shields.io/badge/license-mit?label=MIT)](https://choosealicense.com/licenses/mit/)
 
