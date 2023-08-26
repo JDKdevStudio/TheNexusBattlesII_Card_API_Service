@@ -44,6 +44,256 @@ const docTemplate = `{
                 }
             }
         },
+        "/armaduras/": {
+            "get": {
+                "description": "Este método devuelve una colección de documento tipo Armaduras según la paginación definida",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Armaduras"
+                ],
+                "summary": "trae una colección de documentos tipo Armaduras",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Tamaño de la colección",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "páginación de la colección",
+                        "name": "page_number",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Documento tipo Armadura",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.ArmadurasModel"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Id de búsqueda inválido",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Documento no existente en la base de datos",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/armaduras/{id}": {
+            "get": {
+                "description": "Este método devuelve un solo documento tipo Armadura según el id proporcionado para la búsqueda",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Armaduras"
+                ],
+                "summary": "trae un documento tipo Armadura",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID de Armadura",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Documento tipo Armadura",
+                        "schema": {
+                            "$ref": "#/definitions/models.ArmadurasModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Id de búsqueda inválido",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Documento no existente en la base de datos",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/armas/": {
+            "get": {
+                "description": "Este método devuelve una colección de documento tipo Armas según la paginación definida",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Armas"
+                ],
+                "summary": "trae una colección de documentos tipo Armas",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Tamaño de la colección",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "páginación de la colección",
+                        "name": "page_number",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Documento tipo Armas",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.ArmasModel"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Id de búsqueda inválido",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Documento no existente en la base de datos",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/armas/{id}": {
+            "get": {
+                "description": "Este método devuelve un solo documento tipo arma según el id proporcionado para la búsqueda",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Armas"
+                ],
+                "summary": "trae un documento tipo arma",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID de arma",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Documento tipo arma",
+                        "schema": {
+                            "$ref": "#/definitions/models.ArmasModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Id de búsqueda inválido",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Documento no existente en la base de datos",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/habilidades/": {
+            "get": {
+                "description": "Este método devuelve una colección de documento tipo Habilidades según la paginación definida",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Habilidades"
+                ],
+                "summary": "trae una colección de documentos tipo Habilidades",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Tamaño de la colección",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "páginación de la colección",
+                        "name": "page_number",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Documento tipo Habilidades",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.HabilidadesModel"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Id de búsqueda inválido",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Documento no existente en la base de datos",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/habilidades/{id}": {
             "get": {
                 "description": "Este método devuelve un solo documento tipo héroe según el id proporcionado para la búsqueda",
@@ -68,7 +318,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "Documento tipo Héroe",
+                        "description": "Documento tipo habilidad",
                         "schema": {
                             "$ref": "#/definitions/models.HabilidadesModel"
                         }
@@ -404,9 +654,161 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/items/": {
+            "get": {
+                "description": "Este método devuelve una colección de documento tipo Items según la paginación definida",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Items"
+                ],
+                "summary": "trae una colección de documentos tipo Items",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Tamaño de la colección",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "páginación de la colección",
+                        "name": "page_number",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Documento tipo Items",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.ItemsModel"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Id de búsqueda inválido",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Documento no existente en la base de datos",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/items/{id}": {
+            "get": {
+                "description": "Este método devuelve un solo documento tipo item según el id proporcionado para la búsqueda",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Items"
+                ],
+                "summary": "trae un documento tipo item",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID de",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Documento tipo item",
+                        "schema": {
+                            "$ref": "#/definitions/models.ItemsModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Id de búsqueda inválido",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Documento no existente en la base de datos",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "models.ArmadurasModel": {
+            "type": "object",
+            "properties": {
+                "activo": {
+                    "type": "boolean"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "efecto": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "heroe": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "tipo": {
+                    "type": "string"
+                },
+                "urlImagen": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ArmasModel": {
+            "type": "object",
+            "properties": {
+                "activo": {
+                    "type": "boolean"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "efecto": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "id": {
+                    "type": "string"
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "tipoHeroe": {
+                    "type": "string"
+                },
+                "urlImagen": {
+                    "type": "string"
+                }
+            }
+        },
         "models.HabilidadesModel": {
             "type": "object",
             "required": [
@@ -492,6 +894,33 @@ const docTemplate = `{
                 },
                 "vida": {
                     "type": "integer"
+                }
+            }
+        },
+        "models.ItemsModel": {
+            "type": "object",
+            "properties": {
+                "activo": {
+                    "type": "boolean"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "efecto": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "heroe": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "urlImagen": {
+                    "type": "string"
                 }
             }
         }

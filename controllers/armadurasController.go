@@ -8,53 +8,53 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// HabilidadeGet godoc
+// ArmaduraGet godoc
 //
-// @Router /habilidades/{id} [get]
-// @Tags Habilidades
-// @Summary trae un documento tipo habilidad
-// @Description Este método devuelve un solo documento tipo héroe según el id proporcionado para la búsqueda
-// @Param id path string true "ID de"
+// @Router /armaduras/{id} [get]
+// @Tags Armaduras
+// @Summary trae un documento tipo Armadura
+// @Description Este método devuelve un solo documento tipo Armadura según el id proporcionado para la búsqueda
+// @Param id path string true "ID de Armadura"
 // @Accept json
 // @Produce json
-// @Success 200 {object} models.HabilidadesModel "Documento tipo habilidad"
+// @Success 200 {object} models.ArmadurasModel "Documento tipo Armadura"
 // @Failure 400 {object} string "Id de búsqueda inválido"
 // @Failure 404 {object} string "Documento no existente en la base de datos"
-func GetHabilidadController(c echo.Context) error {
-	heroe_id := c.Param("id") //Obtener parámetro {id} de la URI
-	habilidad_ObjectID, err := primitive.ObjectIDFromHex(heroe_id)
+func GetArmaduraController(c echo.Context) error {
+	armadura_id := c.Param("id") //Obtener parámetro {id} de la URI
+	armadura_ObjectID, err := primitive.ObjectIDFromHex(armadura_id)
 	if err != nil {
 		return c.String(http.StatusBadRequest, "Bad Request: Invalid parameter")
 	}
-	var result models.HabilidadesModel
-	err = result.GetSingleObject(habilidad_ObjectID)
+	var result models.ArmadurasModel
+	err = result.GetSingleObject(armadura_ObjectID)
 	if err != nil {
 		return c.String(http.StatusNotFound, "Document not found")
 	}
 	return c.JSON(http.StatusOK, result)
 }
 
-// HabilidadesGet godoc
+// ArmadurasGet godoc
 //
-// @Router /habilidades/ [get]
-// @Tags Habilidades
-// @Summary trae una colección de documentos tipo Habilidades
-// @Description Este método devuelve una colección de documento tipo Habilidades según la paginación definida
+// @Router /armaduras/ [get]
+// @Tags Armaduras
+// @Summary trae una colección de documentos tipo Armaduras
+// @Description Este método devuelve una colección de documento tipo Armaduras según la paginación definida
 // @Param page_size query int true "Tamaño de la colección"
 // @Param page_number query int true "páginación de la colección"
 // @Accept json
 // @Produce json
-// @Success 200 {object} []models.HabilidadesModel "Documento tipo Habilidades"
+// @Success 200 {object} []models.ArmadurasModel "Documento tipo Armadura"
 // @Failure 400 {object} string "Id de búsqueda inválido"
 // @Failure 404 {object} string "Documento no existente en la base de datos"
-func GetHabilidadesController(c echo.Context) error {
+func GetArmadurasController(c echo.Context) error {
 	var query models.QueryPagination
 	err := c.Bind(&query)
 	if err != nil || !query.Validate() {
 		return c.String(http.StatusBadRequest, "Bad Request: Invalid parameters")
 	}
-	var function models.HabilidadesModel
-	var result []models.HabilidadesModel
+	var function models.ArmadurasModel
+	var result []models.ArmadurasModel
 	result, err = function.GetMultipleObjects(query)
 	if err != nil {
 		return c.String(http.StatusInternalServerError, "Internal Server Errors")

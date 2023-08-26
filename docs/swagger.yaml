@@ -1,5 +1,41 @@
 basePath: /api
 definitions:
+  models.ArmadurasModel:
+    properties:
+      activo:
+        type: boolean
+      desc:
+        type: string
+      efecto:
+        additionalProperties: true
+        type: object
+      heroe:
+        type: string
+      id:
+        type: string
+      tipo:
+        type: string
+      urlImagen:
+        type: string
+    type: object
+  models.ArmasModel:
+    properties:
+      activo:
+        type: boolean
+      desc:
+        type: string
+      efecto:
+        additionalProperties: true
+        type: object
+      id:
+        type: string
+      nombre:
+        type: string
+      tipoHeroe:
+        type: string
+      urlImagen:
+        type: string
+    type: object
   models.HabilidadesModel:
     properties:
       activo:
@@ -62,6 +98,24 @@ definitions:
     - urlImagen
     - vida
     type: object
+  models.ItemsModel:
+    properties:
+      activo:
+        type: boolean
+      desc:
+        type: string
+      efecto:
+        additionalProperties: true
+        type: object
+      heroe:
+        type: string
+      id:
+        type: string
+      nombre:
+        type: string
+      urlImagen:
+        type: string
+    type: object
 externalDocs:
   description: Repository
   url: https://github.com/JDKdevStudio/TheNexusBattlesII_Card_API_Service
@@ -92,6 +146,177 @@ paths:
       summary: Índice del servicio
       tags:
       - Root
+  /armaduras/:
+    get:
+      consumes:
+      - application/json
+      description: Este método devuelve una colección de documento tipo Armaduras
+        según la paginación definida
+      parameters:
+      - description: Tamaño de la colección
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      - description: páginación de la colección
+        in: query
+        name: page_number
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Documento tipo Armadura
+          schema:
+            items:
+              $ref: '#/definitions/models.ArmadurasModel'
+            type: array
+        "400":
+          description: Id de búsqueda inválido
+          schema:
+            type: string
+        "404":
+          description: Documento no existente en la base de datos
+          schema:
+            type: string
+      summary: trae una colección de documentos tipo Armaduras
+      tags:
+      - Armaduras
+  /armaduras/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Este método devuelve un solo documento tipo Armadura según el id
+        proporcionado para la búsqueda
+      parameters:
+      - description: ID de Armadura
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Documento tipo Armadura
+          schema:
+            $ref: '#/definitions/models.ArmadurasModel'
+        "400":
+          description: Id de búsqueda inválido
+          schema:
+            type: string
+        "404":
+          description: Documento no existente en la base de datos
+          schema:
+            type: string
+      summary: trae un documento tipo Armadura
+      tags:
+      - Armaduras
+  /armas/:
+    get:
+      consumes:
+      - application/json
+      description: Este método devuelve una colección de documento tipo Armas según
+        la paginación definida
+      parameters:
+      - description: Tamaño de la colección
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      - description: páginación de la colección
+        in: query
+        name: page_number
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Documento tipo Armas
+          schema:
+            items:
+              $ref: '#/definitions/models.ArmasModel'
+            type: array
+        "400":
+          description: Id de búsqueda inválido
+          schema:
+            type: string
+        "404":
+          description: Documento no existente en la base de datos
+          schema:
+            type: string
+      summary: trae una colección de documentos tipo Armas
+      tags:
+      - Armas
+  /armas/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Este método devuelve un solo documento tipo arma según el id proporcionado
+        para la búsqueda
+      parameters:
+      - description: ID de arma
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Documento tipo arma
+          schema:
+            $ref: '#/definitions/models.ArmasModel'
+        "400":
+          description: Id de búsqueda inválido
+          schema:
+            type: string
+        "404":
+          description: Documento no existente en la base de datos
+          schema:
+            type: string
+      summary: trae un documento tipo arma
+      tags:
+      - Armas
+  /habilidades/:
+    get:
+      consumes:
+      - application/json
+      description: Este método devuelve una colección de documento tipo Habilidades
+        según la paginación definida
+      parameters:
+      - description: Tamaño de la colección
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      - description: páginación de la colección
+        in: query
+        name: page_number
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Documento tipo Habilidades
+          schema:
+            items:
+              $ref: '#/definitions/models.HabilidadesModel'
+            type: array
+        "400":
+          description: Id de búsqueda inválido
+          schema:
+            type: string
+        "404":
+          description: Documento no existente en la base de datos
+          schema:
+            type: string
+      summary: trae una colección de documentos tipo Habilidades
+      tags:
+      - Habilidades
   /habilidades/{id}:
     get:
       consumes:
@@ -108,7 +333,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: Documento tipo Héroe
+          description: Documento tipo habilidad
           schema:
             $ref: '#/definitions/models.HabilidadesModel'
         "400":
@@ -338,4 +563,71 @@ paths:
       summary: actualiza un documento en la colección tipo heroe
       tags:
       - Heroes
+  /items/:
+    get:
+      consumes:
+      - application/json
+      description: Este método devuelve una colección de documento tipo Items según
+        la paginación definida
+      parameters:
+      - description: Tamaño de la colección
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      - description: páginación de la colección
+        in: query
+        name: page_number
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Documento tipo Items
+          schema:
+            items:
+              $ref: '#/definitions/models.ItemsModel'
+            type: array
+        "400":
+          description: Id de búsqueda inválido
+          schema:
+            type: string
+        "404":
+          description: Documento no existente en la base de datos
+          schema:
+            type: string
+      summary: trae una colección de documentos tipo Items
+      tags:
+      - Items
+  /items/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Este método devuelve un solo documento tipo item según el id proporcionado
+        para la búsqueda
+      parameters:
+      - description: ID de
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Documento tipo item
+          schema:
+            $ref: '#/definitions/models.ItemsModel'
+        "400":
+          description: Id de búsqueda inválido
+          schema:
+            type: string
+        "404":
+          description: Documento no existente en la base de datos
+          schema:
+            type: string
+      summary: trae un documento tipo item
+      tags:
+      - Items
 swagger: "2.0"

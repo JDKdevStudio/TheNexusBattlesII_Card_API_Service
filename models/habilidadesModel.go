@@ -7,6 +7,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type HabilidadesModel struct {
@@ -24,4 +25,24 @@ func (h *HabilidadesModel) GetSingleObject(habilidad_ObjectID primitive.ObjectID
 	db := database.GetMongoClient()
 	collection := db.Database(os.Getenv("MONGO_DB")).Collection("habilidades")
 	return collection.FindOne(context.Background(), bson.M{"_id": habilidad_ObjectID}).Decode(&h)
+}
+
+func (HabilidadesModel) GetMultipleObjects(q QueryPagination) ([]HabilidadesModel, error) {
+	result := make([]HabilidadesModel, 0)
+	db := database.GetMongoClient()
+	collection := db.Database(os.Getenv("MONGO_DB")).Collection("habilidades")
+	cursor, err := collection.Find(context.Background(), bson.D{}, options.Find().SetSkip(int64((q.Page_number-1)*q.Page_size)).SetLimit(int64(q.Page_size)))
+	if err != nil {
+		return result, err
+	}
+	defer cursor.Close(context.Background())
+
+	for cursor.Next(context.Background()) {
+		var document HabilidadesModel
+		if err = cursor.Decode(&document); err != nil {
+			return result, err
+		}
+		result = append(result, document)
+	}
+	return result, err
 }
