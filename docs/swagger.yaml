@@ -1,4 +1,341 @@
+basePath: /api
+definitions:
+  models.HabilidadesModel:
+    properties:
+      activo:
+        type: boolean
+      desc:
+        type: string
+      efectoGlobal:
+        additionalProperties: true
+        type: object
+      efectoHeroe:
+        additionalProperties: true
+        type: object
+      heroe:
+        type: string
+      id:
+        type: string
+      nombre:
+        type: string
+      urlImagen:
+        type: string
+    required:
+    - urlImagen
+    type: object
+  models.HeroesModel:
+    properties:
+      activo:
+        type: boolean
+      ataqueBase:
+        type: integer
+      ataqueDado:
+        type: integer
+      clase:
+        type: string
+      danoMax:
+        type: integer
+      defensa:
+        type: integer
+      desc:
+        type: string
+      id:
+        type: string
+      poder:
+        type: integer
+      tipo:
+        type: string
+      urlImagen:
+        type: string
+      vida:
+        type: integer
+    required:
+    - activo
+    - ataqueBase
+    - ataqueDado
+    - clase
+    - danoMax
+    - defensa
+    - desc
+    - poder
+    - tipo
+    - urlImagen
+    - vida
+    type: object
+externalDocs:
+  description: Repository
+  url: https://github.com/JDKdevStudio/TheNexusBattlesII_Card_API_Service
+host: localhost:80
 info:
   contact: {}
-paths: {}
+  description: Servicio API para acceder a las cartas del negocio
+  license:
+    name: MIT
+    url: https://opensource.org/license/mit/
+  termsOfService: http://swagger.io/terms/
+  title: 'The Nexus Battles II: Card API Service'
+  version: "1.0"
+paths:
+  /:
+    get:
+      consumes:
+      - application/json
+      description: Este método devuelve un archivo html que contiene documentación
+        e información relevante sobre el servicio API
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Índice del servicio
+      tags:
+      - Root
+  /habilidades/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Este método devuelve un solo documento tipo héroe según el id proporcionado
+        para la búsqueda
+      parameters:
+      - description: ID de
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Documento tipo Héroe
+          schema:
+            $ref: '#/definitions/models.HabilidadesModel'
+        "400":
+          description: Id de búsqueda inválido
+          schema:
+            type: string
+        "404":
+          description: Documento no existente en la base de datos
+          schema:
+            type: string
+      summary: trae un documento tipo habilidad
+      tags:
+      - Habilidades
+  /heroes/:
+    get:
+      consumes:
+      - application/json
+      description: Este método devuelve una colección de documento tipo héroe según
+        la paginación definida
+      parameters:
+      - description: Tamaño de la colección
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      - description: páginación de la colección
+        in: query
+        name: page_number
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Documento tipo Héroe
+          schema:
+            items:
+              $ref: '#/definitions/models.HeroesModel'
+            type: array
+        "400":
+          description: Id de búsqueda inválido
+          schema:
+            type: string
+        "404":
+          description: Documento no existente en la base de datos
+          schema:
+            type: string
+      summary: trae una colección de documentos tipo heroes
+      tags:
+      - Heroes
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: Este método crea un documento en la colección de heroes
+      parameters:
+      - description: URL de la imagen de la carta
+        in: formData
+        name: urlImagen
+        required: true
+        type: string
+      - description: clase del heroe
+        in: formData
+        name: clase
+        required: true
+        type: string
+      - description: tipo de la carta
+        in: formData
+        name: tipo
+        required: true
+        type: string
+      - description: poder del heroe
+        in: formData
+        name: poder
+        required: true
+        type: integer
+      - description: vida del heroe
+        in: formData
+        name: vida
+        required: true
+        type: integer
+      - description: defensa del heroe
+        in: formData
+        name: defensa
+        required: true
+        type: integer
+      - description: ataque base del heroe
+        in: formData
+        name: ataqueBase
+        required: true
+        type: integer
+      - description: probabilidad de ataque del heroe
+        in: formData
+        name: ataqueDado
+        required: true
+        type: integer
+      - description: daño máximo del heroe
+        in: formData
+        name: danoMax
+        required: true
+        type: integer
+      - description: estado de la carta
+        in: formData
+        name: activo
+        type: boolean
+      - description: descripción de la carta
+        in: formData
+        name: desc
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Documento tipo Héroe
+          schema:
+            $ref: '#/definitions/models.HeroesModel'
+        "400":
+          description: Id de búsqueda inválido
+          schema:
+            type: string
+        "404":
+          description: Documento no existente en la base de datos
+          schema:
+            type: string
+      summary: crea un documento en la colección tipo heroe
+      tags:
+      - Heroes
+  /heroes/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Este método devuelve un solo documento tipo héroe según el id proporcionado
+        para la búsqueda
+      parameters:
+      - description: ID del heroe
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Documento tipo Héroe
+          schema:
+            $ref: '#/definitions/models.HeroesModel'
+        "400":
+          description: Id de búsqueda inválido
+          schema:
+            type: string
+        "404":
+          description: Documento no existente en la base de datos
+          schema:
+            type: string
+      summary: trae un documento tipo heroes
+      tags:
+      - Heroes
+    patch:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: Este método crea un documento en la colección de heroes
+      parameters:
+      - description: Id de la carta
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: URL de la imagen de la carta
+        in: formData
+        name: urlImagen
+        type: string
+      - description: clase del heroe
+        in: formData
+        name: clase
+        type: string
+      - description: tipo de la carta
+        in: formData
+        name: tipo
+        type: string
+      - description: poder del heroe
+        in: formData
+        name: poder
+        type: integer
+      - description: vida del heroe
+        in: formData
+        name: vida
+        type: integer
+      - description: defensa del heroe
+        in: formData
+        name: defensa
+        type: integer
+      - description: ataque base del heroe
+        in: formData
+        name: ataqueBase
+        type: integer
+      - description: probabilidad de ataque del heroe
+        in: formData
+        name: ataqueDado
+        type: integer
+      - description: daño máximo del heroe
+        in: formData
+        name: danoMax
+        type: integer
+      - description: estado de la carta
+        in: formData
+        name: activo
+        type: boolean
+      - description: descripción de la carta
+        in: formData
+        name: desc
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Documento tipo Héroe
+          schema:
+            $ref: '#/definitions/models.HeroesModel'
+        "400":
+          description: Id de búsqueda inválido
+          schema:
+            type: string
+        "404":
+          description: Documento no existente en la base de datos
+          schema:
+            type: string
+      summary: actualiza un documento en la colección tipo heroe
+      tags:
+      - Heroes
 swagger: "2.0"

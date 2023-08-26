@@ -10,22 +10,506 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
+        "termsOfService": "http://swagger.io/terms/",
         "contact": {},
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/license/mit/"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {}
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Este método devuelve un archivo html que contiene documentación e información relevante sobre el servicio API",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "tags": [
+                    "Root"
+                ],
+                "summary": "Índice del servicio",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/habilidades/{id}": {
+            "get": {
+                "description": "Este método devuelve un solo documento tipo héroe según el id proporcionado para la búsqueda",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Habilidades"
+                ],
+                "summary": "trae un documento tipo habilidad",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID de",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Documento tipo Héroe",
+                        "schema": {
+                            "$ref": "#/definitions/models.HabilidadesModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Id de búsqueda inválido",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Documento no existente en la base de datos",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/heroes/": {
+            "get": {
+                "description": "Este método devuelve una colección de documento tipo héroe según la paginación definida",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Heroes"
+                ],
+                "summary": "trae una colección de documentos tipo heroes",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Tamaño de la colección",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "páginación de la colección",
+                        "name": "page_number",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Documento tipo Héroe",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.HeroesModel"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Id de búsqueda inválido",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Documento no existente en la base de datos",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Este método crea un documento en la colección de heroes",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Heroes"
+                ],
+                "summary": "crea un documento en la colección tipo heroe",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "URL de la imagen de la carta",
+                        "name": "urlImagen",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "clase del heroe",
+                        "name": "clase",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "tipo de la carta",
+                        "name": "tipo",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "poder del heroe",
+                        "name": "poder",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "vida del heroe",
+                        "name": "vida",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "defensa del heroe",
+                        "name": "defensa",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "ataque base del heroe",
+                        "name": "ataqueBase",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "probabilidad de ataque del heroe",
+                        "name": "ataqueDado",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "daño máximo del heroe",
+                        "name": "danoMax",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "estado de la carta",
+                        "name": "activo",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "descripción de la carta",
+                        "name": "desc",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Documento tipo Héroe",
+                        "schema": {
+                            "$ref": "#/definitions/models.HeroesModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Id de búsqueda inválido",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Documento no existente en la base de datos",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/heroes/{id}": {
+            "get": {
+                "description": "Este método devuelve un solo documento tipo héroe según el id proporcionado para la búsqueda",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Heroes"
+                ],
+                "summary": "trae un documento tipo heroes",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID del heroe",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Documento tipo Héroe",
+                        "schema": {
+                            "$ref": "#/definitions/models.HeroesModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Id de búsqueda inválido",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Documento no existente en la base de datos",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Este método crea un documento en la colección de heroes",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Heroes"
+                ],
+                "summary": "actualiza un documento en la colección tipo heroe",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Id de la carta",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "URL de la imagen de la carta",
+                        "name": "urlImagen",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "clase del heroe",
+                        "name": "clase",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "tipo de la carta",
+                        "name": "tipo",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "poder del heroe",
+                        "name": "poder",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "vida del heroe",
+                        "name": "vida",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "defensa del heroe",
+                        "name": "defensa",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "ataque base del heroe",
+                        "name": "ataqueBase",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "probabilidad de ataque del heroe",
+                        "name": "ataqueDado",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "daño máximo del heroe",
+                        "name": "danoMax",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "estado de la carta",
+                        "name": "activo",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "descripción de la carta",
+                        "name": "desc",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Documento tipo Héroe",
+                        "schema": {
+                            "$ref": "#/definitions/models.HeroesModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Id de búsqueda inválido",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Documento no existente en la base de datos",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.HabilidadesModel": {
+            "type": "object",
+            "required": [
+                "urlImagen"
+            ],
+            "properties": {
+                "activo": {
+                    "type": "boolean"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "efectoGlobal": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "efectoHeroe": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "heroe": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "urlImagen": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.HeroesModel": {
+            "type": "object",
+            "required": [
+                "activo",
+                "ataqueBase",
+                "ataqueDado",
+                "clase",
+                "danoMax",
+                "defensa",
+                "desc",
+                "poder",
+                "tipo",
+                "urlImagen",
+                "vida"
+            ],
+            "properties": {
+                "activo": {
+                    "type": "boolean"
+                },
+                "ataqueBase": {
+                    "type": "integer"
+                },
+                "ataqueDado": {
+                    "type": "integer"
+                },
+                "clase": {
+                    "type": "string"
+                },
+                "danoMax": {
+                    "type": "integer"
+                },
+                "defensa": {
+                    "type": "integer"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "poder": {
+                    "type": "integer"
+                },
+                "tipo": {
+                    "type": "string"
+                },
+                "urlImagen": {
+                    "type": "string"
+                },
+                "vida": {
+                    "type": "integer"
+                }
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Repository",
+        "url": "https://github.com/JDKdevStudio/TheNexusBattlesII_Card_API_Service"
+    }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
+	Version:          "1.0",
+	Host:             "localhost:80",
+	BasePath:         "/api",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "The Nexus Battles II: Card API Service",
+	Description:      "Servicio API para acceder a las cartas del negocio",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

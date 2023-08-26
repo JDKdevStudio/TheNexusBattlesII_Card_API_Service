@@ -1,14 +1,22 @@
-package initConfig
+package config
 
 import (
-	"log"
-
-	"github.com/joho/godotenv"
+	"TheNexusBattlesII_Card_API_Service/database"
+	"TheNexusBattlesII_Card_API_Service/utils"
+	"context"
+	"fmt"
 )
 
 func Init() {
 	//Load .env file
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("No se encontró el archivo .env") //Se detienen los procesos si no se encuentra el archivo .env
+	utils.LoadEnv()
+
+	var pingdb = database.GetMongoClient()
+
+	if err := pingdb.Ping(context.Background(), nil); err != nil {
+		fmt.Println(err)
+		return
 	}
+
+	fmt.Println("Connected to MongoDB")
 }

@@ -224,8 +224,6 @@ db.armaduras.insertMany([
 ]);
 
 // Colección Ítems
-// ARREGLAR (qué estadística es afectada?) Pinchos de escudo
-// PENDIENTE Veneno lacerante, Mancuerna yugular
 
 db.items.insertMany([
     {
@@ -235,7 +233,7 @@ db.items.insertMany([
         efecto: { case: 1, statEffect: -1, stat: ['1', 'Ataque', 'Defensa', 'Vida'], target: 'Enemy', turnCount: 1 },
         activo: true
     },
-    {
+     {
         urlImagen: '',
         heroe: 'Guerrero Armas',
         nombre: 'Empuñadura de Furia',
@@ -260,19 +258,19 @@ db.items.insertMany([
         urlImagen: '',
         heroe: 'Pícaro Veneno',
         nombre: 'Veneno lacerante',
-        efecto: '',
+        efecto: { case: 0, statEffect: -1, stat: 'Poder', target: 'Enemy', turnCount: 1 },
         activo: true
     },
     {
         urlImagen: '',
         heroe: 'Pícaro Machete',
         nombre: 'Mancuerna yugular',
-        efecto: { case: 3 },
+        efecto: { case: 4, statEffect: 2, stat: 'Daño', target: 'Player', turnCount: 1 },
         activo: true
     }
 ]);
 
-// Todas las cartas son exclusivas del héroe?
+// Colección Habilidades
 
 db.habilidades.insertMany([
     {
@@ -287,7 +285,7 @@ db.habilidades.insertMany([
         urlImagen: '',
         heroe: 'Guerrero Armas',
         nombre: 'Segundo impulso',
-        efectoGlobal: { case: 0, statEffect: [1, 2, 3, 4], stat: 'Vida', target: 'Player', turnCount: 1 },
+        efectoGlobal: { case: 0, statEffect: [1, 4], stat: 'Vida', target: 'Player', turnCount: 1 },
         efectoHeroe: { case: 0, statEffect: 3, stat: 'Vida', target: 'Player', turnCount: 1 },
         activo: true
     },
