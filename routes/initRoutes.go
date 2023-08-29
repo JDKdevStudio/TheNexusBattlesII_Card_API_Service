@@ -9,7 +9,8 @@ import (
 
 func InitRoutes(server *echo.Echo) {
 	//Root
-	server.GET("/", controllers.RootController) //Status del servidor
+	server.GET("/", controllers.RootController)           //Status del servidor
+	server.GET("/api/all/", controllers.GetAllController) // Endpoint privado para el Ecommerce
 	//server.GET("/api/", controllers.IndexController) //Index del servidor
 	server.GET("/docs/*", echoSwagger.WrapHandler) //Iniciar el servicio de Swagger API
 	//Armaduras collection
@@ -18,9 +19,9 @@ func InitRoutes(server *echo.Echo) {
 	//Armas collection
 	server.GET("/api/armas/", controllers.GetArmasController)
 	server.GET("/api/armas/:id", controllers.GetArmaController)
-	//Habilidades collection
-	server.GET("/api/habilidades/", controllers.GetHabilidadesController)
-	server.GET("/api/habilidades/:id", controllers.GetHabilidadController)
+	//Epicas collection
+	server.GET("/api/epicas/", controllers.GetEpicasController)
+	server.GET("/api/epicas/:id", controllers.GetEpicaController)
 	//Heroes collection
 	server.GET("/api/heroes/", controllers.GetheroesController)
 	server.GET("/api/heroes/:id", controllers.GetheroeController)

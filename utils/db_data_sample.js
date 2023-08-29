@@ -270,9 +270,9 @@ db.items.insertMany([
     }
 ]);
 
-// Colección Habilidades
+// Colección Epicas
 
-db.habilidades.insertMany([
+db.epicas.insertMany([
     {
         urlImagen: '',
         heroe: 'Guerrero Tanque',

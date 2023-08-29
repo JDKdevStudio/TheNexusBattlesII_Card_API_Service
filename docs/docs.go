@@ -44,6 +44,32 @@ const docTemplate = `{
                 }
             }
         },
+        "/all/": {
+            "get": {
+                "description": "Este método devuelve un json que contiene todos los documentos de todas las colecciones existentes",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Root"
+                ],
+                "summary": "obtener todos los documentos en un solo objeto",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/armaduras/": {
             "get": {
                 "description": "Este método devuelve una colección de documento tipo Armaduras según la paginación definida",
@@ -240,9 +266,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/habilidades/": {
+        "/epicas/": {
             "get": {
-                "description": "Este método devuelve una colección de documento tipo Habilidades según la paginación definida",
+                "description": "Este método devuelve una colección de documento tipo Epicas según la paginación definida",
                 "consumes": [
                     "application/json"
                 ],
@@ -250,9 +276,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Habilidades"
+                    "Epicas"
                 ],
-                "summary": "trae una colección de documentos tipo Habilidades",
+                "summary": "trae una colección de documentos tipo Epicas",
                 "parameters": [
                     {
                         "type": "integer",
@@ -271,11 +297,11 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "Documento tipo Habilidades",
+                        "description": "Documento tipo Epicas",
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/models.HabilidadesModel"
+                                "$ref": "#/definitions/models.EpicasModel"
                             }
                         }
                     },
@@ -294,7 +320,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/habilidades/{id}": {
+        "/epicas/{id}": {
             "get": {
                 "description": "Este método devuelve un solo documento tipo héroe según el id proporcionado para la búsqueda",
                 "consumes": [
@@ -304,9 +330,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Habilidades"
+                    "Epicas"
                 ],
-                "summary": "trae un documento tipo habilidad",
+                "summary": "trae un documento tipo Epica",
                 "parameters": [
                     {
                         "type": "string",
@@ -318,9 +344,9 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "Documento tipo habilidad",
+                        "description": "Documento tipo Epica",
                         "schema": {
-                            "$ref": "#/definitions/models.HabilidadesModel"
+                            "$ref": "#/definitions/models.EpicasModel"
                         }
                     },
                     "400": {
@@ -809,7 +835,7 @@ const docTemplate = `{
                 }
             }
         },
-        "models.HabilidadesModel": {
+        "models.EpicasModel": {
             "type": "object",
             "required": [
                 "urlImagen"
@@ -934,7 +960,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:80",
+	Host:             "prime.bucaramanga.upb.edu.co",
 	BasePath:         "/api",
 	Schemes:          []string{},
 	Title:            "The Nexus Battles II: Card API Service",
