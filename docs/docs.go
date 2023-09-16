@@ -423,7 +423,7 @@ const docTemplate = `{
                     "application/x-www-form-urlencoded"
                 ],
                 "produces": [
-                    "application/json"
+                    "text/plain"
                 ],
                 "tags": [
                     "Heroes"
@@ -511,7 +511,7 @@ const docTemplate = `{
                     "200": {
                         "description": "Documento tipo Héroe",
                         "schema": {
-                            "$ref": "#/definitions/models.HeroesModel"
+                            "type": "string"
                         }
                     },
                     "400": {
@@ -872,7 +872,6 @@ const docTemplate = `{
         "models.HeroesModel": {
             "type": "object",
             "required": [
-                "activo",
                 "ataqueBase",
                 "ataqueDado",
                 "clase",
@@ -960,7 +959,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "prime.bucaramanga.upb.edu.co",
+	Host:             "main-api-cartas.thenexusbattles2.com",
 	BasePath:         "/api",
 	Schemes:          []string{},
 	Title:            "The Nexus Battles II: Card API Service",

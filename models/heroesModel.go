@@ -12,25 +12,26 @@ import (
 )
 
 type HeroesModel struct {
-	Id         primitive.ObjectID `form:"id" bson:"_id,omitempty"`
-	UrlImagen  string             `form:"urlImagen" bson:"urlImagen,omitempty" validate:"required,omitempty"`
-	Clase      string             `form:"clase" bson:"clase,omitempty" validate:"required,omitempty"`
-	Tipo       string             `form:"tipo" bson:"tipo,omitempty" validate:"required,omitempty"`
-	Poder      int                `form:"poder" bson:"poder,omitempty" validate:"required,omitempty"`
-	Vida       int                `form:"vida" bson:"vida,omitempty" validate:"required,omitempty"`
-	Defensa    int                `form:"defensa" bson:"defensa,omitempty" validate:"required,omitempty"`
-	AtaqueBase int                `form:"ataqueBase" bson:"ataqueBase,omitempty" validate:"required,omitempty"`
-	AtaqueDado int                `form:"ataqueDado" bson:"ataqueDado,omitempty" validate:"required,omitempty"`
-	DanoMax    int                `form:"danoMax" bson:"danoMax,omitempty" validate:"required,omitempty"`
-	Activo     bool               `form:"activo" bson:"activo,omitempty" validate:"required,omitempty"`
-	Desc       string             `form:"desc" bson:"desc,omitempty" validate:"required,omitempty"`
+	Id         primitive.ObjectID `form:"id"         bson:"_id,omitempty"`
+	UrlImagen  *string            `form:"urlImagen"  bson:"urlImagen,omitempty"  validate:"required,omitempty"`
+	Clase      *string            `form:"clase"      bson:"clase,omitempty"      validate:"required,omitempty"`
+	Tipo       *string            `form:"tipo"       bson:"tipo,omitempty"       validate:"required,omitempty"`
+	Poder      *int               `form:"poder"      bson:"poder,omitempty"      validate:"required,omitempty"`
+	Vida       *int               `form:"vida"       bson:"vida,omitempty"       validate:"required,omitempty"`
+	Defensa    *int               `form:"defensa"    bson:"defensa,omitempty"    validate:"required,omitempty"`
+	AtaqueBase *int               `form:"ataqueBase" bson:"ataqueBase,omitempty" validate:"required,omitempty"`
+	AtaqueDado *int               `form:"ataqueDado" bson:"ataqueDado,omitempty" validate:"required,omitempty"`
+	DanoMax    *int               `form:"danoMax"    bson:"danoMax,omitempty"    validate:"required,omitempty"`
+	Activo     *bool              `form:"activo"     bson:"activo,omitempty"`
+	Desc       *string            `form:"desc"       bson:"desc,omitempty"       validate:"required,omitempty"`
 }
 
-func (h HeroesModel) Validate() bool {
+func (h *HeroesModel) Validate() bool {
 	validate := validator.New()
 	if err := validate.Struct(h); err != nil {
 		return false
 	}
+
 	return true
 }
 

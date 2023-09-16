@@ -80,8 +80,8 @@ func GetheroesController(c echo.Context) error {
 // @Param activo formData bool false "estado de la carta"
 // @Param desc formData string true "descripción de la carta"
 // @Accept x-www-form-urlencoded
-// @Produce json
-// @Success 200 {object} models.HeroesModel "Documento tipo Héroe"
+// @Produce plain
+// @Success 200 {object} string     "Documento tipo Héroe"
 // @Failure 400 {object} string "Id de búsqueda inválido"
 // @Failure 404 {object} string "Documento no existente en la base de datos"
 func CreateHeroeController(c echo.Context) error {

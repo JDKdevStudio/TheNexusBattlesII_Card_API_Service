@@ -11,7 +11,7 @@
         },
         "version": "1.0"
     },
-    "host": "prime.bucaramanga.upb.edu.co",
+    "host": "main-api-cartas.thenexusbattles2.com",
     "basePath": "/api",
     "paths": {
         "/": {
@@ -416,7 +416,7 @@
                     "application/x-www-form-urlencoded"
                 ],
                 "produces": [
-                    "application/json"
+                    "text/plain"
                 ],
                 "tags": [
                     "Heroes"
@@ -504,7 +504,7 @@
                     "200": {
                         "description": "Documento tipo Héroe",
                         "schema": {
-                            "$ref": "#/definitions/models.HeroesModel"
+                            "type": "string"
                         }
                     },
                     "400": {
@@ -865,7 +865,6 @@
         "models.HeroesModel": {
             "type": "object",
             "required": [
-                "activo",
                 "ataqueBase",
                 "ataqueDado",
                 "clase",

@@ -21,3 +21,7 @@ The Nexus Battles II API es un componente fundamental diseñado para potenciar l
 * 23-08-23 -- 0.1.2a3
   * Conexión estable a mongoDB
   * Reestructuración del proyecto
+* 16-09-23 -- 0.1.3a4
+  * Conexión https con certificado SSL
+  * Optimización de endpoints
+  * Reestructuración del código fuente

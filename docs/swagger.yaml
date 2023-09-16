@@ -86,7 +86,6 @@ definitions:
       vida:
         type: integer
     required:
-    - activo
     - ataqueBase
     - ataqueDado
     - clase
@@ -119,7 +118,7 @@ definitions:
 externalDocs:
   description: Repository
   url: https://github.com/JDKdevStudio/TheNexusBattlesII_Card_API_Service
-host: prime.bucaramanga.upb.edu.co
+host: main-api-cartas.thenexusbattles2.com
 info:
   contact: {}
   description: Servicio API para acceder a las cartas del negocio
@@ -462,12 +461,12 @@ paths:
         required: true
         type: string
       produces:
-      - application/json
+      - text/plain
       responses:
         "200":
           description: Documento tipo Héroe
           schema:
-            $ref: '#/definitions/models.HeroesModel'
+            type: string
         "400":
           description: Id de búsqueda inválido
           schema:
